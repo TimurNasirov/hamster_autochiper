@@ -415,7 +415,7 @@ try:
             sleep(0.08)
         print('Auto mode disabled.')
         quit()
-        
+    
 except KeyboardInterrupt:
     if "-c" in argv:
         print('Auto mode disabled.')
