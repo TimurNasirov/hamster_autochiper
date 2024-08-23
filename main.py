@@ -346,6 +346,7 @@ try:
         add_hotkey('x', x)
         add_hotkey('y', y)
         add_hotkey('z', z)
+        add_hotkey('0', _0)
         add_hotkey('1', _1)
         add_hotkey('2', _2)
         add_hotkey('3', _3)
