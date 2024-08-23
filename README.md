@@ -21,7 +21,9 @@ CONTINUE_IF_ERROR - continue program if program see incorrect letter in your tex
 I tried it do in phones, but for now modules created in python cant clicking in phone (this is very difficult to do even in other languages)<br>
 You can install LDPlayer or other andorid simulators on your computer, download on it telegram and play hamster kombat<br>
 <h2>Updates</h2>
-<h3>Latest: (1.5)</h3>
+<h3>Latest (1.5.1)</h3>
+"0" in real-time mode (Bug)
+<h3>1.5</h3>
 More logs (disabling/enabling mods, writed letters, etc.)<br>
 "UNNECESSARY_DELAYS" and "CONTINUE IF ERROR" variables in config<br>
 Micro-delays that occur when modes are enabled or disabled. You can enable or disable in config file<br>
