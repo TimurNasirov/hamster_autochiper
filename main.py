@@ -1,4 +1,4 @@
-print(f'Starting utility "hamsterkombat cipher V1.5"...')
+print(f'Starting utility "hamsterkombat cipher V1.6.5"...')
 
 from config import *
 from keyboard import add_hotkey
