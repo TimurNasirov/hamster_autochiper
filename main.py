@@ -5,7 +5,11 @@ from keyboard import add_hotkey
 import pyautogui as pag
 from time import sleep
 from sys import argv
-from random import uniform
+
+class Data:
+    word = ''
+data = Data() #global vars
+
 
 def _long():
     pag.mouseDown()
@@ -315,10 +319,12 @@ def _9():
     sleep(DELAY_PER_LETTER)
 
 if UNNECESSARY_DELAYS:
-    sleep(uniform(0.07, 0.25))
+    sleep(0.2)
 print('Started successfully.')
 try:
     if "-c" not in argv:
+        if '-g' in argv:
+            print('Ignoring "-g" beacuse it is not supported in real-time mode.')
         print('Real-time mode enabled.')
         add_hotkey('a', a)
         add_hotkey('b', b)
@@ -357,15 +363,49 @@ try:
         add_hotkey('8', _8)
         add_hotkey('9', _9)
         
-        
         while True:
             pass
+        
     else:
         print('Auto mode enabled.')
-        word = argv[2]
+        try:
+            data.word = argv[argv.index('-c') + 1]
+            if data.word == '-g':
+                raise IndexError
+            if '-g' in argv:
+                print('Ignoring "-g" flag because code already written.')
+        except IndexError:
+            if '-g' in argv:
+                try:
+                    from getcode import get_code
+                    print('Starting get code from website.')
+                    data.word = get_code()
+                    print('Code from website:', data.word)
+                    ans = input('Continue? (y/n)>').lower()
+                    if ans == 'y' or ans == 'д' or ans == '1' or ans == 'yes' or ans == 'true':
+                        print('Continuation...')
+                    else:
+                        print('Disabling mode; Cancellation... ')
+                        if UNNECESSARY_DELAYS:
+                            sleep(0.16)
+                        print('Auto mode disabled.')
+                        quit()
+                except KeyboardInterrupt:
+                    print('Auto mode disabled.')
+                    if UNNECESSARY_DELAYS:
+                        sleep(0.08)
+                    print('Utility stopped by user.')
+                    quit()
+            else:
+                print('Text not found. Try add text after "-c" or add "-g" flag to get code from website.')
+                if UNNECESSARY_DELAYS:
+                    sleep(0.08)
+                print('Auto mode disabled.')
+                quit()
+        
         sleep(3)
         print('Start writing text. Do not move your mouse')
-        for _i in word:
+        for _i in data.word:
             if _i == 'a': a()
             elif _i == 'b': b()
             elif _i == 'c': c()
@@ -407,7 +447,7 @@ try:
                 if not CONTINUE_IF_ERROR:
                     print('Disabling mode because "continuation if error" is False...')
                     if UNNECESSARY_DELAYS:
-                        sleep(0.08)
+                        sleep(0.16)
                     print('Auto mode disiabled.')
                     quit()
             sleep(DELAY_PER_LETTER)
@@ -423,6 +463,6 @@ except KeyboardInterrupt:
     else:
         print('Real-time mode disabled.')
     if UNNECESSARY_DELAYS:
-        sleep(0.04)
+        sleep(0.08)
     print('Utility stopped by user.')
     quit()
